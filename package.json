@@ -1,0 +1,22 @@
+{
+  "name": "user_base",
+  "version": "0.0.0",
+  "description": "A demo for using hull.io with an existing user base",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "keywords": [
+    "hull.io",
+    "user"
+  ],
+  "author": "Xavier Cambar <xavier@hull.io>",
+  "license": "MIT",
+  "dependencies": {
+    "passport-local": "~0.1.6",
+    "passport": "~0.1.17",
+    "express": "~3.2.5",
+    "jade": "~0.30.0"
+  }
+}

@@ -1,0 +1,21 @@
+!!!
+html
+  head
+    title hull.io - user base demo
+    link(rel="stylesheet",href="//hullstrap.s3.amazonaws.com/0.1/hullstrap.css")
+  body
+    div.container
+      form.form-horizontal(action="/login", method="post")
+        div.control-group
+          label.control-label(for="username") Username
+          div.controls
+            input(id="username",name="username",type="text",placeholder="Username")
+        div.control-group
+          label.control-label(for="password") Password
+          div.controls
+            input#password(name="password",type="password",placeholder="Password")
+        div.control-group
+          div.controls
+            button.btn(type="submit") Login
+    script(src="//code.jquery.com/jquery-2.0.0.js")
+    script(src="//hullstrap.s3.amazonaws.com/0.1/hullstrap.js")

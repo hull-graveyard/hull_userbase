@@ -1,0 +1,15 @@
+!!!
+html
+  head
+    title hull.io - user base demo
+    link(rel="stylesheet",href="//hullstrap.s3.amazonaws.com/0.1/hullstrap.css")
+  body
+    div(data-hull-widget="identity@hull")
+    script(src="//code.jquery.com/jquery-2.0.0.js")
+    script(src="//js.hull.dev/dist/develop/hull.js")
+    script
+      Hull.init({
+        appId: "50f992c179ab99a7ca000007",
+        orgUrl: "http://maisheull.hullapp.dev",
+        userHash: "#{user_hash}"
+      });
