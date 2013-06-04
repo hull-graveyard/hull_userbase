@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Express Demo with Hull Auth</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+    
+    <script src="app.js"></script>
+  </head>
+  <body>
+
+    <div class="container">
+        <div class="row">
+          <div class="page-header">
+            <h1>Hull.js Widgets</h1>
+            <div data-hull-widget="identity@hull"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div data-hull-widget="reviews" data-hull-id="app"></div>
+          <div data-hull-widget="list_button" data-hull-id="app" data-hull-list-name="favorites"></div>
+          <div data-hull-widget="lists@hull"></div>
+        </div>
+
+    </div>
+    <div data-hull-widget="footer@hull"></div>
+
+    <link rel="stylesheet" href="//hullstrap.s3.amazonaws.com/stylesheets/hullstrap.css">
+    <script src="//hullstrap.s3.amazonaws.com/javascripts/hullstrap.js"></script>
+  </body>
+</html>

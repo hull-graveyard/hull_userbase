@@ -2,9 +2,9 @@
 html
   head
     title hull.io - user base demo
-    link(rel="stylesheet",href="//hullstrap.s3.amazonaws.com/0.1/hullstrap.css")
   body
     div.container
+      div(data-hull-widget="identity@hull")
       form.form-horizontal(action="/login", method="post")
         div.control-group
           label.control-label(for="username") Username
@@ -18,4 +18,12 @@ html
           div.controls
             button.btn(type="submit") Login
     script(src="//code.jquery.com/jquery-2.0.0.js")
-    script(src="//hullstrap.s3.amazonaws.com/0.1/hullstrap.js")
+    script(src="//js.hull.dev/dist/develop/hull.js")
+    script
+      Hull.init({
+        appId: "50d5b206a5b190d0aa000004",
+        orgUrl: "http://super.hullapp.dev"
+      });
+    link(rel="stylesheet",href="//hullstrap.s3.amazonaws.com/0.1/hullstrap.css")
+    h1 User Name: #{user && user.name}
+    div User Description: #{user && user.description}
