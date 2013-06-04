@@ -9,10 +9,12 @@ app.set('views', __dirname + '/views');
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.session({ secret: "Na na na, I'm secret!" }));
-app.use(app.router);
 
 useHull(app);
 usePassport(app);
+
+
+app.use(app.router);
 
 
 app.get('/', function (req, res) {

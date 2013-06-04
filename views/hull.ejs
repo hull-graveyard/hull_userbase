@@ -6,31 +6,35 @@
 
     <title>Express Demo with Hull Auth</title>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-
-    
-    <script src="app.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+    <script src="//d3f5pyioow99x0.cloudfront.net/develop/hull.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://hullstrap.s3.amazonaws.com/stylesheets/hullstrap.css">
+    <script>
+      Hull.on('hull.authComplete', function() {
+        _.delay(document.location.reload, 1000);
+      });
+      Hull.init(<%- JSON.stringify(config) %>);
+    </script>
   </head>
   <body>
 
     <div class="container">
-        <div class="row">
-          <div class="page-header">
-            <h1>Hull.js Widgets</h1>
-            <div data-hull-widget="identity@hull"></div>
-          </div>
-        </div>
+      
+      <div class="hero-unit">
+        <h1>Authenticate with Hull</h1>
+      </div>
+      
+      <h3>Hull Identity Widget</h3>
+      <div data-hull-widget="identity@hull"></div>
 
-        <div class="row">
-          <div data-hull-widget="reviews" data-hull-id="app"></div>
-          <div data-hull-widget="list_button" data-hull-id="app" data-hull-list-name="favorites"></div>
-          <div data-hull-widget="lists@hull"></div>
-        </div>
+      <h3>User logged in ?</h3>
+      <pre>
+        <%= JSON.stringify(current_user) %>
+      </pre>
 
     </div>
-    <div data-hull-widget="footer@hull"></div>
 
-    <link rel="stylesheet" href="//hullstrap.s3.amazonaws.com/stylesheets/hullstrap.css">
-    <script src="//hullstrap.s3.amazonaws.com/javascripts/hullstrap.js"></script>
+    <div data-hull-widget="footer@hull"></div>
+    
   </body>
 </html>
