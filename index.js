@@ -2,9 +2,9 @@ var express = require('express'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     app = express(),
-    hull = require('hull');
+    Hull = require('hull');
 
-var hullClient = hull({
+var hullClient = new Hull({
   appId: "50f992c179ab99a7ca000007",
   orgUrl: "http://maisheull.hullapp.dev",
   appSecret: "a55a8f694783c4f0c1dee7fd6ca9ad09"
@@ -35,20 +35,25 @@ app.use(express.session({ secret: "Na na na, I'm secret!" }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);
-
 app.get('/', function (req, res) {
   var config = {}, tpl = 'anonymous';
   if (req.user) {
     tpl = "loggedIn";
     config = {
       user: req.user,
-      user_hash: hullClient.getUserHash(req.user.id)
+      user_hash: hullClient.getUserHash({email: 'aaa@aaa.fr'})
     };
   }
   res.render(tpl, config);
 });
 
-app.post('/login',
+app.get('/logout', function (req, res, next) {
+  req.logout();
+  res.redirect('/');
+});
+
+app.post(
+  '/login',
   passport.authenticate('local', {successRedirect: '/', failureRedirect: '/fail'})
 );
 
