@@ -40,8 +40,7 @@ app.get('/', function (req, res) {
   if (req.user) {
     tpl = "loggedIn";
     config = {
-      user: req.user,
-      user_hash: hullClient.getUserHash({email: 'aaa@aaa.fr'})
+      user_hash: Hull.utils.signUserData({name: req.user.id, email: [req.user.id, req.user.id + '.org'].join('@')}, hullClient.conf.appSecret)
     };
   }
   res.render(tpl, config);
