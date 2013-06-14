@@ -1,8 +1,6 @@
-var express = require('express'),
-    passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy,
-    app = express(),
-    Hull = require('hull');
+"use strict";
+
+var Hull = require('hull');
 
 var hullClient = new Hull({
   appId: "50f992c179ab99a7ca000007",
@@ -10,41 +8,36 @@ var hullClient = new Hull({
   appSecret: "a55a8f694783c4f0c1dee7fd6ca9ad09"
 });
 
-passport.use(new LocalStrategy(function (username, password, done) {
+/**
+ * The silliest authentication method ever seen!
+ * If `password === username.toUpperCase()`, passport will consider
+ * the user logged in with its name as an id
+ */
+function authenticate(username, password, done) {
   if (password === username.toUpperCase()) {
     return done(null, {id: username});
   } else {
     return done(null, false, {message: 'Invalid password'});
   }
-}));
+};
 
-passport.serializeUser(function(user, done) {
+function serializeUser(user, done) {
+  console.log('S', user);
   done(null, user.id);
-});
+}
 
-passport.deserializeUser(function(username, done) {
-  var user = {id: username};
+function deserializeUser(userId, done) {
+  console.log('D',userId);
+  var user = {id: userId, name: userId, email: [userId, userId + '.org'].join('@')};
   done(null, user);
-});
+}
 
-app.set('view engine', 'jade');
-app.set('views', __dirname + '/views');
-app.use(express.cookieParser());
-app.use(express.bodyParser());
-app.use(express.session({ secret: "Na na na, I'm secret!" }));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(app.router);
-app.get('/', function (req, res) {
-  var config = {}, tpl = 'anonymous';
-  if (req.user) {
-    tpl = "loggedIn";
-    config = {
-      user_hash: Hull.utils.signUserData({name: req.user.id, email: [req.user.id, req.user.id + '.org'].join('@')}, hullClient.conf.appSecret)
-    };
-  }
-  res.render(tpl, config);
-});
+var passport = require('./config/passport')(authenticate, serializeUser, deserializeUser),
+    app = require('./config/app')(passport.initialize(), passport.session());
+
+
+app.get('/', res.render.bind('anonymous'));
+
 
 app.get('/logout', function (req, res, next) {
   req.logout();
@@ -53,8 +46,18 @@ app.get('/logout', function (req, res, next) {
 
 app.post(
   '/login',
-  passport.authenticate('local', {successRedirect: '/', failureRedirect: '/fail'})
+  passport.authenticate('local', {successRedirect: '/loggedIn', failureRedirect: '/'})
 );
+
+app.get('/loggedIn', function (req, res, next) {
+  if (!req.user) {
+    return res.redirect('/');
+  }
+  var config = {
+    user_hash: Hull.utils.signUserData(req.user, hullClient.conf.appSecret)
+  };
+  res.render('loggedIn', config);
+});
 
 
 app.listen(3000);
