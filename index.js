@@ -1,5 +1,11 @@
 "use strict";
 
+//
+//
+// Initializes Hull module
+//
+//
+
 var Hull = require('hull');
 
 var hullClient = new Hull({
@@ -7,6 +13,16 @@ var hullClient = new Hull({
   orgUrl: "http://maisheull.hullapp.dev",
   appSecret: "a55a8f694783c4f0c1dee7fd6ca9ad09"
 });
+
+
+
+//
+//
+// Passport-related functions
+//
+//
+
+
 
 /**
  * The silliest authentication method ever seen!
@@ -21,20 +37,28 @@ function authenticate(username, password, done) {
   }
 };
 
+// Here we serialize the user so it can be hashed into a session id
 function serializeUser(user, done) {
-  console.log('S', user);
   done(null, user.id);
 }
 
+// Deserialize the current user fronm the data included in the hash
 function deserializeUser(userId, done) {
-  console.log('D',userId);
   var user = {id: userId, name: userId, email: [userId, userId + '.org'].join('@')};
   done(null, user);
 }
 
+
+
 var passport = require('./config/passport')(authenticate, serializeUser, deserializeUser),
     app = require('./config/app')(passport.initialize(), passport.session());
 
+
+//
+//
+// ROUTES
+//
+//
 
 app.get('/', res.render.bind('anonymous'));
 
