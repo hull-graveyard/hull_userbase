@@ -8,7 +8,7 @@
 
 var Hull = require('hull');
 
-var hullClient = new Hull({
+Hull.conf({
   appId: "50f992c179ab99a7ca000007",
   orgUrl: "http://maisheull.hullapp.dev",
   appSecret: "a55a8f694783c4f0c1dee7fd6ca9ad09"
@@ -60,8 +60,9 @@ var passport = require('./config/passport')(authenticate, serializeUser, deseria
 //
 //
 
-app.get('/', res.render.bind('anonymous'));
-
+app.get('/', function (req, res, next){
+  res.render('anonymous');
+});
 
 app.get('/logout', function (req, res, next) {
   req.logout();
@@ -78,7 +79,7 @@ app.get('/loggedIn', function (req, res, next) {
     return res.redirect('/');
   }
   var config = {
-    user_hash: Hull.utils.signUserData(req.user, hullClient.conf.appSecret)
+    user_hash: Hull.utils.signUserData(req.user)
   };
   res.render('loggedIn', config);
 });
