@@ -9,9 +9,9 @@
 var hull = require('hull');
 
 hull.conf({
-  appId: "50f992c179ab99a7ca000007",
-  orgUrl: "http://maisheull.hullapp.dev",
-  appSecret: "a55a8f694783c4f0c1dee7fd6ca9ad09"
+  appId: "51bf3c5f3c923f805f0001ec",
+  orgUrl: "http://hull-demos.hullapp.io",
+  appSecret: "68889ea92eb685b92d9ee08e1d483365"
 });
 
 
