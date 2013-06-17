@@ -18,7 +18,7 @@ hull.conf({
 var app = require('./config/app')();
 
 app.use('/use_passport', require('./lib/use_passport'));
-require('./lib/use_hull')(app);
+app.use('/use_hull', require('./lib/use_hull'));
 app.use(app.router);
 
 
