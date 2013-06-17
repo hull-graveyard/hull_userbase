@@ -16,7 +16,7 @@ html(lang="en")
       hr
       div(data-hull-widget="identity@hull")
     - else
-      form.form-horizontal(action="/passport")(method="post")
+      form.form-horizontal(action="#{url}")(method="post")
         div.control-group
           label.control-label(for="username") Username
           div.controls
