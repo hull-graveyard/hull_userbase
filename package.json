@@ -9,7 +9,9 @@
   "repository": "",
   "keywords": [
     "hull.io",
-    "user"
+    "user",
+    "express",
+    "passport"
   ],
   "author": "Xavier Cambar <xavier@hull.io>",
   "license": "MIT",
@@ -17,6 +19,8 @@
     "passport-local": "~0.1.6",
     "passport": "~0.1.17",
     "express": "~3.2.5",
-    "jade": "~0.30.0"
+    "ejs": "~0.8",
+    "hull" : "0.1.0",
+    "underscore" : "1.4.4"
   }
 }

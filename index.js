@@ -84,5 +84,3 @@ app.get('/loggedIn', function (req, res, next) {
   res.render('loggedIn', config);
 });
 
-
-app.listen(3000);
