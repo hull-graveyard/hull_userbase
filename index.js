@@ -1,7 +1,8 @@
 var express = require('express'),
     app = express(),
     useHull = require('./lib/use_hull'),
-    usePassport = require('./lib/use_passport');
+    usePassport = require('./lib/use_passport'),
+    port = 3023;
 
 var config = {
   appId:      "50cf17731fb4e935ea000001",
@@ -12,6 +13,7 @@ var config = {
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
+app.use(express.favicon());
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.session({ secret: "Na na na, I'm secret!" }));
@@ -23,7 +25,9 @@ app.use(app.router);
 
 
 app.get('/', function (req, res) {
-  res.render('index');
+  res.redirect('/hull');
 });
 
-app.listen(3023);
+app.listen(port);
+console.log('Listening to port %s...', port);
+
