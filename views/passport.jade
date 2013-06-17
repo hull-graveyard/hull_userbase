@@ -1,0 +1,31 @@
+!!!
+html(lang="en")
+  head
+    title Express Demo with Hull Auth
+
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+    script(src="//js.hull.dev/dist/develop/hull.js")
+    link(rel="stylesheet")(href="http://hullstrap.s3.amazonaws.com/stylesheets/hullstrap.css")
+    script
+      Hull.init(!{JSON.stringify(config)});
+  body
+    div.container
+    - if (current_user)
+      h1 Current User
+      pre !{JSON.stringify(current_user)}
+      hr
+      div(data-hull-widget="identity@hull")
+    - else
+      form.form-horizontal(action="/passport")(method="post")
+        div.control-group
+          label.control-label(for="username") Username
+          div.controls
+            input#username(name="username")(type="text")
+        div.control-group
+          label.control-label(for="password") Password
+          div.controls
+            input#password(name="password")(type="password") Password
+        div.control-group
+          div.controls
+            button.btn(type="submit") Login
+    div(data-hull-widget="footer@hull")

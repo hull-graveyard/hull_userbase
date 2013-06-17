@@ -1,12 +1,5 @@
 "use strict";
-var express = require('express'),
-    slice = [].slice;
-
-function _useMiddlewares () {
-  slice.call(arguments).forEach(function (middleware) {
-    this.use(middleware);
-  }, this);
-}
+var express = require('express');
 
 module.exports = function () {
   var app = express();
@@ -16,6 +9,5 @@ module.exports = function () {
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.session({ secret: "Na na na, I'm secret!" }));
-  _useMiddlewares.apply(app, arguments);
   return app;
 };
