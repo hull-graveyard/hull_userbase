@@ -20,7 +20,8 @@
     "passport": "~0.1.17",
     "express": "~3.2.5",
     "ejs": "~0.8",
-    "hull" : "git://github.com/hull/hull-node.git",
-    "underscore" : "1.4.4"
+    "hull": "git://github.com/hull/hull-node.git",
+    "underscore": "1.4.4",
+    "jade": "~0.31.2"
   }
 }
