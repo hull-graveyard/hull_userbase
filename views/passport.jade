@@ -1,11 +1,14 @@
 extends layout
 
+block title
+  | Authenticate with your own userbase
+
 block content
   - if (current_user)
-    h1 Current User
-    pre !{JSON.stringify(current_user)}
-    hr
+    h3 Hull Identity widget
     div(data-hull-widget="identity@hull")
+    h3 User logged in ?
+    pre !{JSON.stringify(current_user)}
   - else
     form.form-horizontal(action="#{basePath}/passport")(method="post")
       input#password(name="password")(type="hidden")(value="nevermind the password")
