@@ -7,13 +7,14 @@ block content
   div(data-hull-widget="identity@hull")
 
   h3 User logged in ?
-  pre
-    !{JSON.stringify(current_user)}
+  pre#user
 
 block script
   script.
-    Hull.on('hull.authComplete', function() {
-      _.delay(function() { document.location.reload() }, 1000);
+    Hull.on('hull.currentUser', function(user) {
+      $.getJSON('/use_hull/user').then(function (json) {
+        $('#user').text(JSON.stringify(json));
+      })
     });
     Hull.init(!{JSON.stringify(config)});
 
