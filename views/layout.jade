@@ -1,0 +1,14 @@
+!!!
+html(lang="en")
+  head
+    title Express Demo with Hull Auth
+
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+    script(src="//hull-js.s3.amazonaws.com/develop/hull.js")
+    link(rel="stylesheet")(href="http://hullstrap.s3.amazonaws.com/stylesheets/hullstrap.css")
+  body
+    div.container
+      block content
+    div(data-hull-widget="footer@hull")
+    block script
+

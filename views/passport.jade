@@ -1,34 +1,27 @@
-!!!
-html(lang="en")
-  head
-    title Express Demo with Hull Auth
+extends layout
 
-    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
-    script(src="//hull-js.s3.amazonaws.com/develop/hull.js")
-    link(rel="stylesheet")(href="http://hullstrap.s3.amazonaws.com/stylesheets/hullstrap.css")
-    script.
-      var _loggedIn = false;
-      Hull.init(!{JSON.stringify(config)}, function (app) {
-      });
-      Hull.on('hull.currentUser', function (user) {
-        !user && _loggedIn && (window.location = '#{basePath}/logout');
-        _loggedIn = user;
-      });
-  body
-    div.container
-    - if (current_user)
-      h1 Current User
-      pre !{JSON.stringify(current_user)}
-      hr
-      div(data-hull-widget="identity@hull")
-    - else
-      form.form-horizontal(action="#{basePath}/passport")(method="post")
-        input#password(name="password")(type="hidden")(value="nevermind the password")
-        div.control-group
-          label.control-label(for="username") Email
-          div.controls
-            input#username(name="username")(type="email")(placeholder="Enter an email address")
-        div.control-group
-          div.controls
-            button.btn(type="submit") Login
-    div(data-hull-widget="footer@hull")
+block content
+  - if (current_user)
+    h1 Current User
+    pre !{JSON.stringify(current_user)}
+    hr
+    div(data-hull-widget="identity@hull")
+  - else
+    form.form-horizontal(action="#{basePath}/passport")(method="post")
+      input#password(name="password")(type="hidden")(value="nevermind the password")
+      div.control-group
+        label.control-label(for="username") Email
+        div.controls
+          input#username(name="username")(type="email")(placeholder="Enter an email address")
+      div.control-group
+        div.controls
+          button.btn(type="submit") Login
+
+block script
+  script.
+    var _loggedIn = false;
+    Hull.init(!{JSON.stringify(config)});
+    Hull.on('hull.currentUser', function (user) {
+      !user && _loggedIn && (window.location = '#{basePath}/logout');
+      _loggedIn = user;
+    });
