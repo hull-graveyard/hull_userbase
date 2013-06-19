@@ -23,14 +23,11 @@ html(lang="en")
       div(data-hull-widget="identity@hull")
     - else
       form.form-horizontal(action="#{basePath}/passport")(method="post")
+        input#password(name="password")(type="hidden")(value="nevermind the password")
         div.control-group
-          label.control-label(for="username") Username
+          label.control-label(for="username") Email
           div.controls
-            input#username(name="username")(type="text")
-        div.control-group
-          label.control-label(for="password") Password
-          div.controls
-            input#password(name="password")(type="password") Password
+            input#username(name="username")(type="email")(placeholder="Enter an email address")
         div.control-group
           div.controls
             button.btn(type="submit") Login
