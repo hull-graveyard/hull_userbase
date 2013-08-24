@@ -9,9 +9,9 @@
 var hull = require('hull');
 
 hull.conf({
-  appId: "51bf3c5f3c923f805f0001ec",
-  orgUrl: "http://hull-demos.hullapp.io",
-  appSecret: "68889ea92eb685b92d9ee08e1d483365"
+  appId: process.env.HULL_APP_ID,
+  orgUrl: process.env.HULL_ORG_URL,
+  appSecret: process.env.HULL_APP_SECRET
 });
 
 
@@ -32,4 +32,4 @@ app.get('/', function (req, res, next){
   res.redirect('/use_hull');
 });
 
-app.listen(3000);
+app.listen(3010);
